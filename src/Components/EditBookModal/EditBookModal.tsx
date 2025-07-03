@@ -6,6 +6,7 @@ import { FaSpinner } from 'react-icons/fa';
 import { useNavigate } from 'react-router';
 import { useEffect, useState } from 'react';
 import { MdEdit } from 'react-icons/md';
+import { X } from 'lucide-react';
 export function EditBookModal({ book, setOpen }) {
   const [isOpen, setIsOpen] = useState(false);
   const navigate = useNavigate();
@@ -53,6 +54,10 @@ export function EditBookModal({ book, setOpen }) {
   //   }
   //   setIsOpen(true);
   // };
+  const handelColseModal = () => {
+    setIsOpen(false);
+    setOpen(false);
+  };
   return (
     <div className='flex items-center justify-centerbg-gradient-to-br from-blue-100 to-purple-200'>
       {/* Open Modal Button */}
@@ -69,13 +74,19 @@ export function EditBookModal({ book, setOpen }) {
       {/* Modal */}
       {isOpen && (
         <div className='fixed inset-0 flex items-center justify-center bg-gray-200 bg-opacity-50 backdrop-blur-sm'>
-          <div className='w-3xl mx-auto mt-10 px-6 py-8 bg-white dark:bg-gray-900 rounded-2xl shadow-lg'>
+          <div className='w-3xl mx-auto mt-10 px-6 py-8 bg-white dark:bg-gray-900 rounded-2xl shadow-lg fixed'>
             <h2 className='text-4xl font-bold text-center text-blue-600 dark:text-blue-400 mb-8'>
               📚 Update Book
             </h2>
+            <span
+              className='absolute top-4 right-4 text-gray-500 cursor-pointer'
+              onClick={handelColseModal}
+            >
+              <X className='w-6 h-6' />{' '}
+            </span>
             <form
               onSubmit={handleSubmit(onSubmit)}
-              className='grid gap-6 grid-cols-2'
+              className='grid gap-4 grid-cols-2'
             >
               {/* Book Title */}
               <div>
@@ -197,7 +208,7 @@ export function EditBookModal({ book, setOpen }) {
                   {...register('copies', {
                     required: 'Total copies is required',
                     min: {
-                      value: 1,
+                      value: 0,
                       message: 'Copies must be at least 1',
                     },
                     valueAsNumber: true,
@@ -232,19 +243,5 @@ export function EditBookModal({ book, setOpen }) {
         </div>
       )}
     </div>
-    // <div>
-    //   <div className='fixed inset-0 flex items-center justify-center bg-black bg-opacity-50'>
-    //     <div className='bg-white p-6 rounded-lg shadow-lg max-w-sm w-full'>
-    //       <h2 className='text-xl font-semibold mb-4'>This is a Modal</h2>
-    //       <p className='mb-4'>You can add any content you want here.</p>
-    //       <button
-    //         onClick={() => setIsOpen(false)}
-    //         className='px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700'
-    //       >
-    //         Close
-    //       </button>
-    //     </div>
-    //   </div>
-    // </div>
   );
 }

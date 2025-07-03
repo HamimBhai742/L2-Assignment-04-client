@@ -21,12 +21,12 @@ export const baseApi = createApi({
       query: () => '/books',
       providesTags: ['Book'],
     }),
-    getBookById: builder.query({
-      query: (id) => `/book/${id}`,
+    getSignleBookById: builder.query({
+      query: (id) => `/books/${id}`,
       providesTags: ['Book'],
     }),
     editBook: builder.mutation({
-      query: ({book, id}) => {
+      query: ({ book, id }) => {
         return {
           url: `/edit-book/${id}`,
           method: 'PATCH',
@@ -35,7 +35,34 @@ export const baseApi = createApi({
       },
       invalidatesTags: ['Book'],
     }),
+    deleteBook: builder.mutation({
+      query: (id) => ({
+        url: `/delete-book/${id}`,
+        method: 'DELETE',
+      }),
+      invalidatesTags: ['Book'],
+    }),
+    borrowBook: builder.mutation({
+      query: ({ bookId, data }) => ({
+        url: `/borrow/${bookId}`,
+        method: 'POST',
+        body: data,
+      }),
+      invalidatesTags: ['Book'],
+    }),
+    getBorrowSummary: builder.query({
+      query: () => '/borrow-summary',
+      providesTags: ['Book'],
+    }),
   }),
 });
 
-export const { useAddBookMutation, useGetAllBooksQuery ,useEditBookMutation} = baseApi;
+export const {
+  useAddBookMutation,
+  useGetAllBooksQuery,
+  useEditBookMutation,
+  useDeleteBookMutation,
+  useBorrowBookMutation,
+  useGetBorrowSummaryQuery,
+  useGetSignleBookByIdQuery
+} = baseApi;

@@ -5,8 +5,11 @@ import { MdDelete } from 'react-icons/md';
 import { BorrowBookModal } from '@/Components/BorrowBookModal/BorrowBookModal';
 import { EditBookModal } from '@/Components/EditBookModal/EditBookModal';
 import Swal from 'sweetalert2';
+import { useDeleteBookMutation } from '@/redux/api/baseApi';
+import { data, Link } from 'react-router';
 export default function BooksRow({ book }: { book: IBook }) {
   const [open, setOpen] = useState(false);
+  const [deleteBook] = useDeleteBookMutation();
   const dropdownRef = useRef<HTMLDivElement | null>(null);
   useEffect(() => {
     function handleClickOutside(event: MouseEvent) {
@@ -22,7 +25,6 @@ export default function BooksRow({ book }: { book: IBook }) {
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, [dropdownRef]);
 
-
   const handelDelete = (id: string) => {
     Swal.fire({
       title: 'Are you sure?',
@@ -32,14 +34,25 @@ export default function BooksRow({ book }: { book: IBook }) {
       confirmButtonColor: '#3085d6',
       cancelButtonColor: '#d33',
       confirmButtonText: 'Yes, delete it!',
-    }).then((result) => {
+    }).then(async (result) => {
       if (result.isConfirmed) {
         console.log(id);
-        Swal.fire({
-          title: 'Deleted!',
-          text: 'Your file has been deleted.',
-          icon: 'success',
-        });
+        const res = await deleteBook(id);
+        console.log(res);
+        setOpen(false);
+        if (res.data) {
+          Swal.fire({
+            title: 'Deleted!',
+            text: 'Book deleted successfully',
+            icon: 'success',
+          });
+        } else {
+          Swal.fire({
+            title: 'Error!',
+            text: 'Failed to delete book',
+            icon: 'error',
+          });
+        }
       }
     });
   };
@@ -49,26 +62,26 @@ export default function BooksRow({ book }: { book: IBook }) {
         <div className='inline-flex items-center gap-x-3'>
           <div className='flex items-center gap-x-2'>
             <div>
-              <h2 className='font-normal text-gray-800 dark:text-white '>
+              <Link to={`/books/${book._id}`} className=' hover:underline hover:text-blue-600 font-medium  text-gray-800 dark:text-white '>
                 {book.title}
-              </h2>
+              </Link>
             </div>
           </div>
         </div>
       </td>
-      <td className='px-12 py-4 text-sm font-normal text-gray-700 whitespace-nowrap'>
+      <td className='px-12 py-4 text-sm font-medium  text-gray-800 dark:text-white whitespace-nowrap'>
         {book.author}
       </td>
-      <td className='px-4 py-4 text-sm text-gray-500 dark:text-gray-300 whitespace-nowrap'>
+      <td className='px-4 py-4 text-sm font-medium  text-gray-800 dark:text-white whitespace-nowrap'>
         {book.genre}
       </td>
-      <td className='px-4 py-4 text-sm text-gray-500 dark:text-gray-300 whitespace-nowrap'>
+      <td className='px-4 py-4 text-sm font-medium  text-gray-800 dark:text-white  whitespace-nowrap'>
         {book.isbn}
       </td>
-      <td className='px-4 py-4 text-sm text-gray-500 dark:text-gray-300 whitespace-nowrap'>
+      <td className='px-4 py-4 text-sm font-medium  text-gray-800 dark:text-white whitespace-nowrap'>
         {book.copies}
       </td>
-      <td className='px-4 py-4 text-sm text-gray-500 dark:text-gray-300 whitespace-nowrap'>
+      <td className='px-4 py-4 text-sm font-medium  text-gray-800 dark:text-white whitespace-nowrap'>
         {book.available ? (
           <span className='text-green-500 bg-green-200 px-4 py-2 font-medium rounded-full'>
             Available
@@ -92,7 +105,7 @@ export default function BooksRow({ book }: { book: IBook }) {
             <div className='absolute left-0 z-10 mt-2 w-24 origin-top-right rounded-md bg-white shadow-lg ring-1'>
               <div className='py-1 flex flex-col'>
                 <EditBookModal book={book} setOpen={setOpen} />
-                <BorrowBookModal />
+                <BorrowBookModal bookId={book._id} setOpen={setOpen} />
                 <button
                   onClick={() => handelDelete(book._id)}
                   className='w-full px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 text-left'

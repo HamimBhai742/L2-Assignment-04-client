@@ -11,7 +11,12 @@ export interface IBook {
   isbn: string;
   description: string;
   copies: number;
-available: boolean
+  available: boolean;
+}
+
+export interface BorroBook {
+  quantity: number;
+  dueDate: string;
 }
 
 export interface IBook2 {
@@ -27,5 +32,4 @@ export interface IBook2 {
   isbn: string;
   description: string;
   copies: number;
-
 }

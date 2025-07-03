@@ -4,6 +4,7 @@ import Error from '../pages/Error/Error';
 import Books from '../pages/Books/Books';
 import AddBook from '../pages/AddBook/AddBook';
 import BorrowSummry from '@/pages/BorrowSummry/BorrowSummry';
+import BookDetails from '@/pages/Books/BookDetails';
 
 const router = createBrowserRouter([
   {
@@ -13,11 +14,11 @@ const router = createBrowserRouter([
     children: [
       {
         index: true,
-        Component: Books
+        Component: Books,
       },
       {
         path: '/books',
-        Component: Books
+        Component: Books,
       },
       {
         path: '/create-book',
@@ -26,8 +27,11 @@ const router = createBrowserRouter([
       {
         path: '/borrow-summary',
         element: <BorrowSummry />,
-      }
-
+      },
+      {
+        path: '/books/:id',
+        element: <BookDetails />,
+      },
     ],
   },
 ]);
