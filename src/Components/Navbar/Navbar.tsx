@@ -49,7 +49,7 @@ export default function Navbar() {
           </ul>
         </div>
        <Link to='/books' className=' normal-case text-xl font-bold'>
-          Library Management
+        📚  Library Management
         </Link>
       </div>
       <div className='navbar-center hidden lg:flex'>

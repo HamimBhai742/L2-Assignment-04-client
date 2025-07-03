@@ -1,9 +1,17 @@
 import { useGetBorrowSummaryQuery } from '@/redux/api/baseApi';
 import BorrowTableRow from './BorrowTableRow';
+import type { IBorrow } from '@/redux/type';
+import { ImSpinner } from 'react-icons/im';
 
 export default function BorrowSummry() {
-  const { data: borrows = [] } = useGetBorrowSummaryQuery(undefined);
-  console.log(borrows);
+  const { data: borrows = [],isLoading } = useGetBorrowSummaryQuery(undefined);
+
+  if (isLoading)
+    return (
+      <div className='flex items-center justify-center min-h-screen'>
+        <ImSpinner className='animate-spin text-9xl ' />
+      </div>
+    );
   return (
     <section className='container px-4 mx-auto'>
       <div className='flex flex-col mt-6'>
@@ -36,8 +44,8 @@ export default function BorrowSummry() {
                   </tr>
                 </thead>
                 <tbody className='bg-white divide-y divide-gray-200 dark:divide-gray-700 dark:bg-gray-900'>
-                  {borrows?.data?.map((borrow) => (
-                    <BorrowTableRow key={borrow.id} borrow={borrow} />
+                  {borrows?.data?.map((borrow: IBorrow) => (
+                    <BorrowTableRow key={borrow._id} borrow={borrow} />
                   ))}
                 </tbody>
               </table>

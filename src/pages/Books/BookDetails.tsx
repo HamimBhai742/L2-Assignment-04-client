@@ -3,7 +3,6 @@ import { Card, CardContent } from '@/components/ui/card';
 import { useGetSignleBookByIdQuery } from '@/redux/api/baseApi';
 import { useParams } from 'react-router';
 import {
-  BookOpen,
   User,
   Tags,
   Barcode,
@@ -13,15 +12,19 @@ import {
   CalendarPlus,
   Clock,
 } from 'lucide-react';
+import { ImSpinner } from 'react-icons/im';
 
 export default function BookDetails() {
   const { id } = useParams<{ id: string }>();
   const { data, isLoading } = useGetSignleBookByIdQuery(id);
   const book = data?.data;
-  console.log(book);
-  if (isLoading) {
-    return <div>Loading...</div>;
-  }
+ 
+  if (isLoading)
+    return (
+      <div className='flex items-center justify-center min-h-screen'>
+        <ImSpinner className='animate-spin text-9xl ' />
+      </div>
+    );
   return (
     <div className='min-h-screen bg-gradient-to-br from-green-50 to-green-100 dark:from-gray-900 dark:to-gray-800 flex items-center justify-center p-6 sm:p-8'>
       <Card className='w-full max-w-3xl rounded-2xl shadow-2xl dark:bg-gray-900'>
@@ -38,7 +41,9 @@ export default function BookDetails() {
             <div className='flex items-center gap-2'>
               <Tags className='w-5 h-5' />{' '}
               <span className='font-semibold'>Genre:</span>{' '}
-              <Badge className='p-2 font-medium' variant='outline'>{book.genre}</Badge>
+              <Badge className='p-2 font-medium' variant='outline'>
+                {book.genre}
+              </Badge>
             </div>
             <div className='flex items-center gap-2'>
               <Barcode className='w-5 h-5' />{' '}

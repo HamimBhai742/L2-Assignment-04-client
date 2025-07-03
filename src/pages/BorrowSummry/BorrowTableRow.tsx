@@ -1,7 +1,6 @@
-import React from 'react';
+import type { IBorrow } from '@/redux/type';
 
-export default function BorrowTableRow({ borrow }) {
-  console.log(borrow);
+export default function BorrowTableRow({ borrow }: { borrow: IBorrow }) {
   return (
     <tr>
       <td className='px-4 py-4 text-sm font-medium text-gray-700 whitespace-nowrap'>

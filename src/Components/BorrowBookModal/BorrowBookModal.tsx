@@ -24,9 +24,9 @@ export function BorrowBookModal({
     reset,
   } = useForm();
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
-    console.log(bookId);
+
     const res = await borrowBook({ bookId, data });
-    console.log(res);
+  
     if (res.data) {
       toast.success(res.data.message);
       navigate('/borrow-summary');

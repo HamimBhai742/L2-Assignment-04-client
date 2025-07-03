@@ -1,12 +1,12 @@
 import {  useEditBookMutation } from '@/redux/api/baseApi';
-import type { IBook } from '@/redux/type';
+import type { IBook, IBookWithId } from '@/redux/type';
 import { useForm, type FieldValue } from 'react-hook-form';
 import toast from 'react-hot-toast';
 import { FaSpinner } from 'react-icons/fa';
 import { useEffect, useState } from 'react';
 import { MdEdit } from 'react-icons/md';
 import { X } from 'lucide-react';
-export function EditBookModal({ book, setOpen }:{ book: IBook, setOpen: (open: boolean) => void }) {
+export function EditBookModal({ book, setOpen }:{ book: IBookWithId, setOpen: (open: boolean) => void }) {
   const [isOpen, setIsOpen] = useState(false);
   const {
     register,

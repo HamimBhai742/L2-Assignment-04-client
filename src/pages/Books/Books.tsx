@@ -2,14 +2,20 @@ import { Button } from '@/components/ui/button';
 import { useGetAllBooksQuery } from '@/redux/api/baseApi';
 import { Link } from 'react-router';
 import BooksRow from './BooksRow';
-import type { IBook } from '@/redux/type';
+import type { IBookWithId } from '@/redux/type';
+import { ImSpinner } from 'react-icons/im';
 
 export default function Books() {
-  const { data: books = [] ,isLoading} = useGetAllBooksQuery(undefined, {
+  const { data: books = [], isLoading } = useGetAllBooksQuery(undefined, {
     refetchOnMountOrArgChange: true,
   });
-  console.log(books);
-  if (isLoading) return <div>Loading...</div>;
+
+  if (isLoading)
+    return (
+      <div className='flex items-center justify-center min-h-screen'>
+        <ImSpinner className='animate-spin text-9xl ' />
+      </div>
+    );
   return (
     <div className='mb-10'>
       <section className='container px-4 mx-auto'>
@@ -83,7 +89,7 @@ export default function Books() {
                     </tr>
                   </thead>
                   <tbody className='bg-white divide-y divide-gray-200 dark:divide-gray-700 dark:bg-gray-900'>
-                    {books?.data?.map((book: IBook) => (
+                    {books?.data?.map((book: IBookWithId) => (
                       <BooksRow key={book._id} book={book} />
                     ))}
                   </tbody>

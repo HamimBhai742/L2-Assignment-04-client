@@ -1,4 +1,4 @@
-import type { IBook } from '@/redux/type';
+import type { IBookWithId } from '@/redux/type';
 import { MoreVertical } from 'lucide-react';
 import { useEffect, useRef, useState } from 'react';
 import { MdDelete } from 'react-icons/md';
@@ -6,8 +6,8 @@ import { BorrowBookModal } from '@/Components/BorrowBookModal/BorrowBookModal';
 import { EditBookModal } from '@/Components/EditBookModal/EditBookModal';
 import Swal from 'sweetalert2';
 import { useDeleteBookMutation } from '@/redux/api/baseApi';
-import { data, Link } from 'react-router';
-export default function BooksRow({ book }: { book: IBook }) {
+import { Link } from 'react-router';
+export default function BooksRow({ book }: { book: IBookWithId }) {
   const [open, setOpen] = useState(false);
   const [deleteBook] = useDeleteBookMutation();
   const dropdownRef = useRef<HTMLDivElement | null>(null);
@@ -36,9 +36,7 @@ export default function BooksRow({ book }: { book: IBook }) {
       confirmButtonText: 'Yes, delete it!',
     }).then(async (result) => {
       if (result.isConfirmed) {
-        console.log(id);
         const res = await deleteBook(id);
-        console.log(res);
         setOpen(false);
         if (res.data) {
           Swal.fire({
@@ -62,7 +60,10 @@ export default function BooksRow({ book }: { book: IBook }) {
         <div className='inline-flex items-center gap-x-3'>
           <div className='flex items-center gap-x-2'>
             <div>
-              <Link to={`/books/${book._id}`} className=' hover:underline hover:text-blue-600 font-medium  text-gray-800 dark:text-white '>
+              <Link
+                to={`/books/${book._id}`}
+                className=' hover:underline hover:text-blue-600 font-medium  text-gray-800 dark:text-white '
+              >
                 {book.title}
               </Link>
             </div>
