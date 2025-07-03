@@ -2,6 +2,7 @@ import { Button } from '@/components/ui/button';
 import { useGetAllBooksQuery } from '@/redux/api/baseApi';
 import { Link } from 'react-router';
 import BooksRow from './BooksRow';
+import type { IBook } from '@/redux/type';
 
 export default function Books() {
   const { data: books = [] ,isLoading} = useGetAllBooksQuery(undefined, {
@@ -35,54 +36,54 @@ export default function Books() {
                     <tr>
                       <th
                         scope='col'
-                        className='py-3.5 px-4 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400'
+                        className='py-3.5 px-4  font-semibold text-left rtl:text-right text-gray-500 dark:text-gray-400'
                       >
                         Title
                       </th>
 
                       <th
                         scope='col'
-                        className='px-12 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400'
+                        className='px-12 py-3.5  font-semibold text-left rtl:text-right text-gray-500 dark:text-gray-400'
                       >
                         Author
                       </th>
 
                       <th
                         scope='col'
-                        className='px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400'
+                        className='px-4 py-3.5  font-semibold text-left rtl:text-right text-gray-500 dark:text-gray-400'
                       >
                         Genre
                       </th>
 
                       <th
                         scope='col'
-                        className='px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400'
+                        className='px-4 py-3.5  font-semibold text-left rtl:text-right text-gray-500 dark:text-gray-400'
                       >
                         ISBN
                       </th>
 
                       <th
                         scope='col'
-                        className='px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400'
+                        className='px-4 py-3.5  font-semibold text-left rtl:text-right text-gray-500 dark:text-gray-400'
                       >
                         Copies
                       </th>
                       <th
                         scope='col'
-                        className='px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400'
+                        className='px-4 py-3.5  font-semibold text-left rtl:text-right text-gray-500 dark:text-gray-400'
                       >
                         Availability
                       </th>
                       <th
                         scope='col'
-                        className='px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400'
+                        className='px-4 py-3.5  font-semibold text-left rtl:text-right text-gray-500 dark:text-gray-400'
                       >
                         Actions
                       </th>
                     </tr>
                   </thead>
                   <tbody className='bg-white divide-y divide-gray-200 dark:divide-gray-700 dark:bg-gray-900'>
-                    {books?.data?.map((book) => (
+                    {books?.data?.map((book: IBook) => (
                       <BooksRow key={book._id} book={book} />
                     ))}
                   </tbody>

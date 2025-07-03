@@ -21,7 +21,21 @@ export const baseApi = createApi({
       query: () => '/books',
       providesTags: ['Book'],
     }),
+    getBookById: builder.query({
+      query: (id) => `/book/${id}`,
+      providesTags: ['Book'],
+    }),
+    editBook: builder.mutation({
+      query: ({book, id}) => {
+        return {
+          url: `/edit-book/${id}`,
+          method: 'PATCH',
+          body: book,
+        };
+      },
+      invalidatesTags: ['Book'],
+    }),
   }),
 });
 
-export const { useAddBookMutation, useGetAllBooksQuery } = baseApi;
+export const { useAddBookMutation, useGetAllBooksQuery ,useEditBookMutation} = baseApi;

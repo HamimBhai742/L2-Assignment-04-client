@@ -1,6 +1,7 @@
 
+import { ModeToggle } from '@/components/mode-toggle';
 import { Link, NavLink } from 'react-router';
-import { ModeToggle } from '../mode-toggle';
+
 
 export default function Navbar() {
   const navItems = [

@@ -16,7 +16,7 @@ const AddBook = () => {
   const [AddNewBook, { isLoading }] = useAddBookMutation();
 
   const onSubmit = async (data: FieldValue<IBook>) => {
-    const bookData: IBook = {
+    const bookData: IBook  = {
       ...(data as IBook2),
       available: true,
     };
