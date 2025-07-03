@@ -1,14 +1,19 @@
 import { useBorrowBookMutation } from '@/redux/api/baseApi';
-import type { BorroBook } from '@/redux/type';
 import { X } from 'lucide-react';
 import { useState } from 'react';
-import { useForm } from 'react-hook-form';
+import { useForm, type FieldValues, type SubmitHandler } from 'react-hook-form';
 import toast from 'react-hot-toast';
 import { FaSpinner } from 'react-icons/fa';
 import { IoBook } from 'react-icons/io5';
 import { useNavigate } from 'react-router';
 
-export function BorrowBookModal({ bookId, setOpen }: { bookId: string, setOpen: (open: boolean) => void }) {
+export function BorrowBookModal({
+  bookId,
+  setOpen,
+}: {
+  bookId: string;
+  setOpen: (open: boolean) => void;
+}) {
   const [isOpen, setIsOpen] = useState(false);
   const navigate = useNavigate();
   const [borrowBook, { isLoading }] = useBorrowBookMutation();
@@ -18,7 +23,7 @@ export function BorrowBookModal({ bookId, setOpen }: { bookId: string, setOpen: 
     formState: { errors },
     reset,
   } = useForm();
-  const onSubmit = async (data: BorroBook) => {
+  const onSubmit: SubmitHandler<FieldValues> = async (data) => {
     console.log(bookId);
     const res = await borrowBook({ bookId, data });
     console.log(res);

@@ -1,4 +1,5 @@
 export interface IBook {
+  _id:string;
   title: string;
   author: string;
   genre:
@@ -15,6 +16,7 @@ export interface IBook {
 }
 
 export interface BorroBook {
+  _id: string;
   quantity: number;
   dueDate: string;
 }

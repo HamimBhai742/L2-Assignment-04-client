@@ -1,15 +1,13 @@
-import { useAddBookMutation, useEditBookMutation } from '@/redux/api/baseApi';
-import type { IBook, IBook2 } from '@/redux/type';
+import {  useEditBookMutation } from '@/redux/api/baseApi';
+import type { IBook } from '@/redux/type';
 import { useForm, type FieldValue } from 'react-hook-form';
 import toast from 'react-hot-toast';
 import { FaSpinner } from 'react-icons/fa';
-import { useNavigate } from 'react-router';
 import { useEffect, useState } from 'react';
 import { MdEdit } from 'react-icons/md';
 import { X } from 'lucide-react';
-export function EditBookModal({ book, setOpen }) {
+export function EditBookModal({ book, setOpen }:{ book: IBook, setOpen: (open: boolean) => void }) {
   const [isOpen, setIsOpen] = useState(false);
-  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
@@ -28,12 +26,10 @@ export function EditBookModal({ book, setOpen }) {
     });
   }, [book, reset]);
   const onSubmit = async (data: FieldValue<IBook>) => {
-    console.log(data);
     const res = await editBook({
       book: data,
       id: book._id,
     });
-    // const res = await AddNewBook(bookData);
     if (res.data) {
       toast.success(res.data.message);
       reset();
@@ -46,14 +42,6 @@ export function EditBookModal({ book, setOpen }) {
     }
   };
 
-  // const handelEditBookModal = () => {
-  //   if (book.available === false) {
-  //     setOpen(false);
-  //     toast.error('This book is currently unavailable for editing.');
-  //     return;
-  //   }
-  //   setIsOpen(true);
-  // };
   const handelColseModal = () => {
     setIsOpen(false);
     setOpen(false);
