@@ -9,7 +9,9 @@ import { useDeleteBookMutation } from '@/redux/api/baseApi';
 import { Link } from 'react-router';
 export default function BooksRow({ book }: { book: IBookWithId }) {
   const [open, setOpen] = useState(false);
+  const [openUpwards, setOpenUpwards] = useState(false);
   const [deleteBook] = useDeleteBookMutation();
+
   const dropdownRef = useRef<HTMLDivElement | null>(null);
   useEffect(() => {
     function handleClickOutside(event: MouseEvent) {
@@ -21,9 +23,22 @@ export default function BooksRow({ book }: { book: IBookWithId }) {
         setOpen(false);
       }
     }
+
     document.addEventListener('mousedown', handleClickOutside);
     return () => document.removeEventListener('mousedown', handleClickOutside);
-  }, [dropdownRef]);
+  }, []);
+
+  useEffect(() => {
+    if (open && dropdownRef.current) {
+      const rect = dropdownRef.current.getBoundingClientRect();
+      const spaceBelow = window.innerHeight - rect.bottom;
+      if (spaceBelow < 150) {
+        setOpenUpwards(true);
+      } else {
+        setOpenUpwards(false);
+      }
+    }
+  }, [open]);
 
   const handelDelete = (id: string) => {
     Swal.fire({
@@ -103,7 +118,11 @@ export default function BooksRow({ book }: { book: IBookWithId }) {
           </button>
 
           {open && (
-            <div className='absolute left-0 z-10 mt-2 w-24 origin-top-right rounded-md bg-white shadow-lg ring-1'>
+            <div
+              className={`absolute ${
+                openUpwards ? 'bottom-full mb-2' : 'mt-2'
+              } left-0 z-50 w-24 origin-top-right rounded-md bg-white shadow-lg ring-1`}
+            >
               <div className='py-1 flex flex-col'>
                 <EditBookModal book={book} setOpen={setOpen} />
                 <BorrowBookModal bookId={book._id} setOpen={setOpen} />

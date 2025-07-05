@@ -35,12 +35,12 @@ const AddBook = () => {
 
   return (
     <div className='max-w-4xl mx-auto mt-10 px-6 py-8 bg-white dark:bg-gray-900 rounded-2xl shadow-lg'>
-      <h2 className='text-4xl font-bold text-center text-blue-600 dark:text-blue-400 mb-8'>
+      <h2 className='md:text-4xl text-2xl font-bold text-center text-blue-600 dark:text-blue-400 mb-8'>
         📚 Add New Book
       </h2>
       <form
         onSubmit={handleSubmit(onSubmit)}
-        className='grid gap-6 grid-cols-2'
+        className='grid gap-6 md:grid-cols-2 max-sm:flex max-sm:flex-col'
       >
         {/* Book Title */}
         <div>
@@ -49,7 +49,7 @@ const AddBook = () => {
           </label>
           <input
             {...register('title', { required: 'Title is required' })}
-            className='w-full px-4 py-2 border rounded-lg bg-white dark:bg-gray-800 dark:text-white border-gray-300 dark:border-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500'
+            className='w-full px-4 h-12 py-2 border rounded-lg bg-white dark:bg-gray-800 dark:text-white border-gray-300 dark:border-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500'
             placeholder='Enter book title'
           />
           {typeof errors.title?.message === 'string' && (
@@ -64,7 +64,7 @@ const AddBook = () => {
           </label>
           <input
             {...register('author', { required: 'Author is required' })}
-            className='w-full px-4 py-2 border rounded-lg bg-white dark:bg-gray-800 dark:text-white border-gray-300 dark:border-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500'
+            className='w-full h-12 px-4 py-2 border rounded-lg bg-white dark:bg-gray-800 dark:text-white border-gray-300 dark:border-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500'
             placeholder='Enter author name'
           />
           {typeof errors.author?.message === 'string' && (
@@ -79,7 +79,7 @@ const AddBook = () => {
           </label>
           <select
             {...register('genre', { required: 'Genre is required' })}
-            className='w-full px-4 py-2 border select rounded-lg bg-white dark:bg-gray-800 dark:text-white border-gray-300 dark:border-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500'
+            className='w-full px-4 h-12 py-2 border select rounded-lg bg-white dark:bg-gray-800 dark:text-white border-gray-300 dark:border-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500'
           >
             <option value=''>Select genre</option>
             <option value='FICTION'>Fiction</option>
@@ -111,7 +111,7 @@ const AddBook = () => {
                 message: 'ISBN must be at most 10 characters long',
               },
             })}
-            className='w-full px-4 py-2 border rounded-lg bg-white dark:bg-gray-800 dark:text-white border-gray-300 dark:border-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500'
+            className='w-full h-12 px-4 py-2 border rounded-lg bg-white dark:bg-gray-800 dark:text-white border-gray-300 dark:border-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500'
             placeholder='Enter ISBN number'
           />
           {typeof errors.isbn?.message === 'string' && (
@@ -120,7 +120,7 @@ const AddBook = () => {
         </div>
 
         {/* Description */}
-        <div className='col-span-2'>
+        <div className='md:col-span-2'>
           <label className='block font-semibold text-gray-700 dark:text-gray-200 mb-1'>
             Description
           </label>
@@ -132,7 +132,7 @@ const AddBook = () => {
                 message: 'Description must be at least 30 characters long',
               },
             })}
-            className='w-full px-4 py-2 border rounded-lg bg-white dark:bg-gray-800 dark:text-white border-gray-300 dark:border-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500'
+            className='w-full  px-4 py-2 border rounded-lg bg-white dark:bg-gray-800 dark:text-white border-gray-300 dark:border-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500'
             placeholder='Enter book description'
             rows={4}
           ></textarea>
@@ -158,7 +158,7 @@ const AddBook = () => {
               },
               valueAsNumber: true,
             })}
-            className='w-full px-4 py-2 border rounded-lg bg-white dark:bg-gray-800 dark:text-white border-gray-300 dark:border-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500'
+            className='w-full h-12 px-4 py-2 border rounded-lg bg-white dark:bg-gray-800 dark:text-white border-gray-300 dark:border-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500'
             placeholder='Enter total copies'
           />
           {typeof errors.copies?.message === 'string' && (
@@ -170,7 +170,7 @@ const AddBook = () => {
         <div className='text-center mt-3 col-span-2'>
           <button
             type='submit'
-            className='bg-blue-600 hover:bg-blue-700 dark:bg-blue-500 dark:hover:bg-blue-600 text-white font-semibold py-2 px-6 rounded-lg transition duration-200 w-full'
+            className='bg-blue-600 h-12 hover:bg-blue-700 dark:bg-blue-500 dark:hover:bg-blue-600 text-white font-semibold py-2 px-6 rounded-lg transition duration-200 w-full'
           >
             {isLoading ? (
               <FaSpinner className='animate-spin mx-auto' />

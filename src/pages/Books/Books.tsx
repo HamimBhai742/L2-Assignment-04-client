@@ -19,18 +19,16 @@ export default function Books() {
   return (
     <div className='mb-10'>
       <section className='container px-4 mx-auto'>
-        <div className='sm:flex sm:items-center sm:justify-between'>
-          <h2 className='text-2xl font-semibold text-gray-800 dark:text-white'>
+        <div className='flex items-center justify-between mt-8'>
+          <h2 className='md:text-2xl text-xl font-semibold text-gray-800 dark:text-white'>
             Books
           </h2>
 
-          <div className='flex items-center mt-4 gap-x-3'>
-            <Link to='/create-book'>
-              <Button className='w-1/2 font-semibold px-5 py-2 text-sm text-gray-800 transition-colors duration-200 bg-white border rounded-lg sm:w-auto dark:hover:bg-gray-800 dark:bg-gray-900 hover:bg-gray-100 dark:text-white dark:border-gray-700'>
-                Add Book
-              </Button>
-            </Link>
-          </div>
+          <Link to='/create-book'>
+            <Button className=' font-semibold md:p-5 md:text-xl text-gray-800 transition-colors duration-200 bg-white border rounded-lg  dark:hover:bg-gray-800 dark:bg-gray-900 hover:bg-gray-100 dark:text-white dark:border-gray-700'>
+              Add Book
+            </Button>
+          </Link>
         </div>
 
         <div className='flex flex-col mt-6'>

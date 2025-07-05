@@ -10,7 +10,7 @@ export default function Navbar() {
   { name: "Borrow Summary", path: "/borrow-summary" },
 ];
   return (
-    <div className='navbar bg-base-100 shadow-sm  dark:bg-gray-900 text-gray-900 dark:text-white px-6 py-4 '>
+    <div className='navbar bg-base-100 shadow-sm  dark:bg-gray-900 text-gray-900 dark:text-white md:px-6 py-4 '>
       <div className='navbar-start'>
         <div className='dropdown'>
           <div tabIndex={0} role='button' className='btn btn-ghost lg:hidden'>
@@ -32,7 +32,7 @@ export default function Navbar() {
           </div>
           <ul
             tabIndex={0}
-            className='menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow'
+            className='menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-36 p-2 shadow'
           >
             {navItems.map((item) => (
               <li key={item.name}>
@@ -48,7 +48,7 @@ export default function Navbar() {
             ))}
           </ul>
         </div>
-       <Link to='/books' className=' normal-case text-xl font-bold'>
+       <Link to='/books' className=' text-sm font-semibold md:text-2xl md:font-bold'>
         📚  Library Management
         </Link>
       </div>

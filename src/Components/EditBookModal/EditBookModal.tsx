@@ -74,7 +74,7 @@ export function EditBookModal({ book, setOpen }:{ book: IBookWithId, setOpen: (o
             </span>
             <form
               onSubmit={handleSubmit(onSubmit)}
-              className='grid gap-4 grid-cols-2'
+              className='grid gap-4 md:grid-cols-2 max-sm:flex max-sm:flex-col max-sm:px-40 '
             >
               {/* Book Title */}
               <div>
